@@ -30,41 +30,49 @@
             Dumbbell: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M18 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M9 12h6"/><path d="M3 10v4"/><path d="M21 10v4"/></svg>,
             Brain: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"/></svg>,
             Zen: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>,
-            Coach: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Coach: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+            Clock: ({ size = 14 }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         };
 
         const Dashboard = ({ onSelectDay }) => {
             const days = [
-                { id: 'lun', name: 'Lunes', type: 'Empuje', color: 'bg-rose-800' },
-                { id: 'mar', name: 'Martes', type: 'Tracción', color: 'bg-slate-800' },
-                { id: 'mie', name: 'Miércoles', type: 'Recu Activa', color: 'bg-slate-400' },
-                { id: 'jue', name: 'Jueves', type: 'Pierna', color: 'bg-slate-800' },
-                { id: 'vie', name: 'Viernes', type: 'Híbrido', color: 'bg-rose-800' },
-                { id: 'sab', name: 'Sábado', type: 'Endurance', color: 'bg-slate-500' },
-                { id: 'dom', name: 'Domingo', type: 'Zen / Prep', color: 'bg-slate-300' }
+                { id: 'lun', name: 'Lunes', type: 'Empuje', color: 'bg-rose-800', total: '95', work: '49', recu: '46' },
+                { id: 'mar', name: 'Martes', type: 'Tracción', color: 'bg-slate-800', total: '105', work: '59', recu: '46' },
+                { id: 'mie', name: 'Miércoles', type: 'Recu Activa', color: 'bg-slate-400', total: '85', work: '45', recu: '40' },
+                { id: 'jue', name: 'Jueves', type: 'Pierna', color: 'bg-slate-800', total: '110', work: '67', recu: '43' },
+                { id: 'vie', name: 'Viernes', type: 'Híbrido', color: 'bg-rose-800', total: '95', work: '49', recu: '46' },
+                { id: 'sab', name: 'Sábado', type: 'Endurance', color: 'bg-slate-500', total: '110', work: '75', recu: '35' },
+                { id: 'dom', name: 'Domingo', type: 'Zen / Prep', color: 'bg-slate-300', total: '60', work: '5', recu: '55' }
             ];
 
             return (
                 <div className="min-h-screen bg-white pb-20 fade-in">
                     <div className="bg-slate-900 p-10 rounded-b-[3.5rem] text-white mb-10 shadow-2xl relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-40 h-40 bg-rose-600/10 rounded-full -mr-20 -mt-20 blur-3xl"></div>
-                        <h1 className="text-5xl font-black uppercase italic tracking-tighter mb-2 relative z-10 leading-none">Iron Hub</h1>
-                        <p className="text-rose-500 text-[10px] font-bold uppercase tracking-[0.4em] relative z-10">Elite Performance Dashboard</p>
+                        <h1 className="text-5xl font-black uppercase italic tracking-tighter mb-2 relative z-10 leading-none text-center md:text-left">Iron Hub</h1>
+                        <p className="text-rose-500 text-[10px] font-bold uppercase tracking-[0.4em] relative z-10 text-center md:text-left">Elite Performance Dashboard</p>
                     </div>
-                    <div className="px-6 space-y-4">
+                    <div className="px-6 space-y-4 max-w-2xl mx-auto">
                         <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-2">Plan Semanal</h2>
                         {days.map(day => (
                             <button key={day.id} onClick={() => onSelectDay(day.id)} className="w-full flex items-center justify-between p-5 bg-slate-50 rounded-[2.2rem] active:scale-95 transition-all border border-transparent active:border-rose-200 shadow-sm">
                                 <div className="flex items-center gap-5">
-                                    <div className={`${day.color} w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg`}>
+                                    <div className={`${day.color} w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg shrink-0`}>
                                         <Icons.Zap />
                                     </div>
                                     <div className="text-left">
                                         <h3 className="font-black text-slate-800 uppercase text-lg italic leading-none">{day.name}</h3>
-                                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">{day.type}</p>
+                                        <div className="flex flex-wrap items-center gap-2 mt-1">
+                                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{day.type}</p>
+                                            <span className="text-slate-300 text-[8px]">•</span>
+                                            <div className="flex items-center gap-1 text-rose-800 font-black text-[10px] uppercase tracking-tighter bg-rose-50 px-2 py-0.5 rounded-full border border-rose-100">
+                                                <Icons.Clock size={10} />
+                                                {day.total}m <span className="text-[8px] opacity-40 font-bold ml-1">({day.work} + {day.recu})</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="text-slate-300">
+                                <div className="text-slate-300 shrink-0 ml-2">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                                 </div>
                             </button>
@@ -74,144 +82,177 @@
             );
         };
 
-        const DailyReport = ({ dayData, onBack }) => (
-            <div className="min-h-screen bg-slate-50 pb-20 fade-in">
-                <div className="sticky top-0 bg-white/90 backdrop-blur-lg px-4 py-4 flex items-center border-b border-slate-100 z-50">
-                    <button onClick={onBack} className="p-2 text-slate-400 active:text-rose-800"><Icons.ChevronLeft /></button>
-                    <h2 className="flex-1 text-center text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{dayData.title}</h2>
-                    <div className="w-10"></div>
-                </div>
+        const DailyReport = ({ dayData, onBack }) => {
+            const hasExercises = dayData.exercises && dayData.exercises.length > 0;
+            const hasCardio = dayData.cardio !== null;
 
-                <div className="p-5 space-y-8 max-w-md mx-auto">
-                    <div className="bg-slate-900 rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-rose-600/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
-                        <p className="text-[10px] font-bold text-rose-500 uppercase tracking-[0.3em] mb-2">{dayData.subtitle}</p>
-                        <h1 className="text-3xl font-black italic uppercase tracking-tighter mb-6 leading-none">Iron Performance</h1>
-                        <div className="flex gap-4">
-                            <div className="bg-white/5 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10">
-                                <p className="text-[8px] uppercase font-bold text-slate-500 mb-1">Peso</p>
-                                <p className="text-sm font-black italic">112 KG</p>
-                            </div>
-                            <div className="bg-white/5 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10">
-                                <p className="text-[8px] uppercase font-bold text-slate-500 mb-1">Déficit</p>
-                                <p className="text-sm font-black italic">~2,000 KCAL</p>
-                            </div>
-                        </div>
+            return (
+                <div className="min-h-screen bg-slate-50 pb-20 fade-in">
+                    {/* Header Fijo */}
+                    <div className="sticky top-0 bg-white/90 backdrop-blur-lg px-4 py-4 flex items-center border-b border-slate-100 z-50">
+                        <button onClick={onBack} className="p-2 text-slate-400 active:text-rose-800"><Icons.ChevronLeft /></button>
+                        <h2 className="flex-1 text-center text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{dayData.title}</h2>
+                        <div className="w-10"></div>
                     </div>
 
-                    {dayData.exercises && dayData.exercises.length > 0 && (
-                        <section className="space-y-4">
-                            <div className="flex items-center gap-3 px-2 text-rose-800">
-                                <Icons.Dumbbell />
-                                <h3 className="text-xs font-black uppercase tracking-widest text-slate-800">Bloque 1: Fuerza Pesada</h3>
-                            </div>
-                            {dayData.exercises.map((ex, i) => (
-                                <div key={i} className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm space-y-3">
-                                    <div className="flex justify-between items-start">
-                                        <div>
-                                            <h4 className="font-black text-slate-800 uppercase text-sm leading-tight">{ex.name}</h4>
-                                            <p className="text-[10px] text-slate-400 font-bold uppercase mt-1">{ex.warmup}</p>
-                                        </div>
-                                        <span className="text-[9px] font-black px-2 py-1 rounded-lg border bg-rose-50 text-rose-800 border-rose-100 uppercase tracking-wider">{ex.rir}</span>
-                                    </div>
-                                    <div className="text-rose-800 font-black text-base italic border-t border-slate-50 pt-3">
-                                        {ex.work}
-                                    </div>
+                    <div className="p-5 space-y-8 max-w-md mx-auto">
+                        {/* Banner de Estado */}
+                        <div className="bg-slate-900 rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-rose-600/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                            <div className="flex justify-between items-start mb-2 relative z-10">
+                                <p className="text-[10px] font-bold text-rose-500 uppercase tracking-[0.3em]">{dayData.subtitle}</p>
+                                <div className="flex items-center gap-1 bg-rose-800/50 px-3 py-1 rounded-full text-[10px] font-black tracking-widest border border-rose-500/30">
+                                    <Icons.Clock />
+                                    {dayData.totalEstimatedTime} MIN
                                 </div>
-                            ))}
-                            {dayData.strengthTip && (
-                                <div className="bg-slate-100 p-4 rounded-2xl border border-slate-200 mt-2">
-                                    <p className="text-[11px] text-slate-500 leading-relaxed italic">
-                                        <span className="font-black text-slate-800 not-italic uppercase tracking-tighter mr-1">💡 Coach Tip:</span> {dayData.strengthTip}
-                                    </p>
+                            </div>
+                            <h1 className="text-3xl font-black italic uppercase tracking-tighter mb-6 leading-none">Iron Performance</h1>
+                            <div className="flex gap-4 relative z-10 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                                <div className="bg-white/5 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10">
+                                    <span className="opacity-50 mr-2">Ejer:</span> {dayData.strengthBlockTime + (hasCardio ? dayData.cardio.estTime : 0)}M
+                                </div>
+                                <div className="bg-white/5 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10">
+                                    <span className="opacity-50 mr-2">Recu:</span> {dayData.recoveryTime}M
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Bloque 1: Fuerza */}
+                        <section className="space-y-4">
+                            <div className="flex justify-between items-center px-2">
+                                <div className="flex items-center gap-3 text-rose-800">
+                                    <Icons.Dumbbell />
+                                    <h3 className="text-xs font-black uppercase tracking-widest text-slate-800">Bloque 1: Fuerza</h3>
+                                </div>
+                                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest italic">Est. {dayData.strengthBlockTime} min</span>
+                            </div>
+                            
+                            {hasExercises ? (
+                                dayData.exercises.map((ex, i) => (
+                                    <div key={i} className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm space-y-3">
+                                        <div className="flex justify-between items-start">
+                                            <div>
+                                                <h4 className="font-black text-slate-800 uppercase text-sm leading-tight">{ex.name}</h4>
+                                                <p className="text-[10px] text-slate-400 font-bold uppercase mt-1">{ex.warmup}</p>
+                                            </div>
+                                            <div className="flex flex-col items-end gap-1">
+                                                <span className="text-[9px] font-black px-2 py-1 rounded-lg border bg-rose-50 text-rose-800 border-rose-100 uppercase tracking-wider">{ex.rir}</span>
+                                                <span className="text-[8px] font-bold text-slate-300 uppercase tracking-tighter italic">⏳ {ex.estTime}m</span>
+                                            </div>
+                                        </div>
+                                        <div className="text-rose-800 font-black text-base italic border-t border-slate-50 pt-3">
+                                            {ex.work}
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="bg-white/50 p-8 rounded-[2rem] border border-dashed border-slate-200 flex items-center justify-center">
+                                    <span className="text-xs font-black text-slate-300 uppercase tracking-[0.3em]">N / A</span>
                                 </div>
                             )}
                         </section>
-                    )}
 
-                    {dayData.cardio && (
+                        {/* Bloque 2: Cardio */}
                         <section className="space-y-4">
-                            <div className="flex items-center gap-3 px-2 text-rose-800">
-                                <Icons.Zap />
-                                <h3 className="text-xs font-black uppercase tracking-widest text-slate-800">Bloque 2: {dayData.cardio.type}</h3>
-                            </div>
-                            <div className="bg-white p-6 rounded-[3rem] border border-slate-100 shadow-sm space-y-6">
-                                <div className="grid grid-cols-2 gap-4 border-b border-slate-50 pb-5">
-                                    <div className="text-center">
-                                        <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1">FC Prom / Max</p>
-                                        <p className="font-black text-slate-800">{dayData.cardio.fcAvg} <span className="text-rose-800">/ {dayData.cardio.fcMax}</span></p>
-                                    </div>
-                                    <div className="text-center border-l border-slate-100">
-                                        <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1">Drag / Cadencia</p>
-                                        <p className="font-black text-slate-800">{dayData.cardio.drag} <span className="text-[9px] font-normal opacity-50">@{dayData.cardio.spm}</span></p>
-                                    </div>
+                            <div className="flex justify-between items-center px-2">
+                                <div className="flex items-center gap-3 text-rose-800">
+                                    <Icons.Zap />
+                                    <h3 className="text-xs font-black uppercase tracking-widest text-slate-800">Bloque 2: Cardio</h3>
                                 </div>
-                                <div className="space-y-3 text-[11px] text-slate-600 font-bold">
-                                    {dayData.cardio.details.map((detail, i) => (
-                                        <div key={i} className="flex justify-between items-center bg-slate-50 p-3 rounded-xl border border-slate-100/50">
-                                            <span>{detail.label}</span>
-                                            <span className="font-black text-slate-800 uppercase italic text-right ml-2">{detail.val}</span>
+                                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest italic">Est. {hasCardio ? dayData.cardio.estTime : "0"} min</span>
+                            </div>
+                            
+                            {hasCardio ? (
+                                <div className="bg-white p-6 rounded-[3rem] border border-slate-100 shadow-sm space-y-6">
+                                    <div className="border-b border-slate-50 pb-2 mb-2">
+                                        <h4 className="text-sm font-black text-slate-800 uppercase italic tracking-tight">{dayData.cardio.type}</h4>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-4 border-b border-slate-50 pb-5">
+                                        <div className="text-center">
+                                            <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1">FC Prom / Max</p>
+                                            <p className="font-black text-slate-800">{dayData.cardio.fcAvg} <span className="text-rose-800">/ {dayData.cardio.fcMax}</span></p>
                                         </div>
-                                    ))}
-                                </div>
-                                {dayData.cardio.finisher && (
-                                    <div className="bg-rose-800 rounded-[2rem] p-5 text-white shadow-xl shadow-rose-100">
-                                        <p className="text-[9px] font-black uppercase tracking-widest opacity-70 mb-1">Finalizador</p>
-                                        <p className="text-sm font-black italic uppercase tracking-tighter">🚀 {dayData.cardio.finisher}</p>
-                                    </div>
-                                )}
-                            </div>
-                        </section>
-                    )}
-
-                    <div className="grid grid-cols-1 gap-6">
-                        <section className="space-y-4">
-                            <div className="flex items-center gap-3 px-2 text-blue-600">
-                                <Icons.Zen />
-                                <h3 className="text-xs font-black uppercase tracking-widest text-slate-800">Bloque 3: Recuperación Zen</h3>
-                            </div>
-                            <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm">
-                                <div className="space-y-4">
-                                    {dayData.recovery.map((item, i) => (
-                                        <div key={i} className="flex justify-between items-center border-b border-slate-50 pb-3 last:border-0 last:pb-0">
-                                            <span className="text-xs font-bold text-slate-500">{item.name}</span>
-                                            <span className="text-xs font-black text-rose-800 bg-rose-50 px-3 py-1 rounded-xl">{item.val}</span>
+                                        <div className="text-center border-l border-slate-100">
+                                            <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1">Drag / Cadencia</p>
+                                            <p className="font-black text-slate-800">{dayData.cardio.drag} <span className="text-[9px] font-normal opacity-50">@{dayData.cardio.spm}</span></p>
                                         </div>
-                                    ))}
+                                    </div>
+                                    <div className="space-y-3 text-[11px] text-slate-600 font-bold">
+                                        {dayData.cardio.details.map((detail, i) => (
+                                            <div key={i} className="flex justify-between items-center bg-slate-50 p-3 rounded-xl border border-slate-100/50">
+                                                <span>{detail.label}</span>
+                                                <span className="font-black text-slate-800 uppercase italic text-right ml-2">{detail.val}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    {dayData.cardio.finisher && (
+                                        <div className="bg-rose-800 rounded-[2rem] p-5 text-white shadow-xl shadow-rose-100">
+                                            <p className="text-[9px] font-black uppercase tracking-widest opacity-70 mb-1">Finalizador</p>
+                                            <p className="text-sm font-black italic uppercase tracking-tighter">🚀 {dayData.cardio.finisher}</p>
+                                        </div>
+                                    )}
                                 </div>
-                            </div>
+                            ) : (
+                                <div className="bg-white/50 p-8 rounded-[2rem] border border-dashed border-slate-200 flex items-center justify-center">
+                                    <span className="text-xs font-black text-slate-300 uppercase tracking-[0.3em]">N / A</span>
+                                </div>
+                            )}
                         </section>
 
-                        <section className="space-y-4">
-                            <div className="flex items-center gap-3 px-2 text-rose-800">
-                                <Icons.Brain />
-                                <h3 className="text-xs font-black uppercase tracking-widest text-slate-800">Enfoque Pro</h3>
-                            </div>
-                            <div className="bg-slate-900 rounded-[2.5rem] p-8 text-white shadow-xl">
-                                <ul className="space-y-4">
-                                    {dayData.proTips.map((tip, i) => (
-                                        <li key={i} className="flex gap-4 items-start">
-                                            <span className="text-rose-500 font-black mt-1">●</span>
-                                            <p className="text-[11px] font-bold text-slate-300 leading-relaxed uppercase tracking-tight">{tip}</p>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </section>
-                    </div>
+                        {/* Bloque 3: Recuperación & Tips */}
+                        <div className="grid grid-cols-1 gap-6">
+                            <section className="space-y-4">
+                                <div className="flex justify-between items-center px-2">
+                                    <div className="flex items-center gap-3 text-blue-600">
+                                        <Icons.Zen />
+                                        <h3 className="text-xs font-black uppercase tracking-widest text-slate-800">Bloque 3: Recuperación Zen</h3>
+                                    </div>
+                                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest italic">Est. {dayData.recoveryTime} min</span>
+                                </div>
+                                <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                                    <div className="space-y-4">
+                                        {dayData.recovery.map((item, i) => (
+                                            <div key={i} className="flex justify-between items-center border-b border-slate-50 pb-3 last:border-0 last:pb-0">
+                                                <span className="text-xs font-bold text-slate-500">{item.name}</span>
+                                                <span className="text-xs font-black text-rose-800 bg-rose-50 px-3 py-1 rounded-xl">{item.val}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </section>
 
-                    <footer className="border-t-2 border-slate-100 pt-8 px-2 space-y-4">
-                        <div className="flex items-center gap-3 text-slate-900">
-                            <Icons.Coach />
-                            <h3 className="text-[10px] font-black uppercase tracking-[0.3em]">Notas del Coach</h3>
+                            <section className="space-y-4">
+                                <div className="flex items-center gap-3 px-2 text-rose-800">
+                                    <Icons.Brain />
+                                    <h3 className="text-xs font-black uppercase tracking-widest text-slate-800">Enfoque Pro</h3>
+                                </div>
+                                <div className="bg-slate-900 rounded-[2.5rem] p-8 text-white shadow-xl">
+                                    <ul className="space-y-4">
+                                        {dayData.proTips.map((tip, i) => (
+                                            <li key={i} className="flex gap-4 items-start">
+                                                <span className="text-rose-500 font-black mt-1">●</span>
+                                                <p className="text-[11px] font-bold text-slate-300 leading-relaxed uppercase tracking-tight">{tip}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </section>
                         </div>
-                        <p className="text-xs text-slate-400 italic leading-relaxed pl-6 border-l-4 border-rose-800/20 py-2">
-                            "{dayData.coachNote}"
-                        </p>
-                    </footer>
+
+                        {/* Notas del Coach */}
+                        <footer className="border-t-2 border-slate-100 pt-8 px-2 space-y-4 text-center">
+                            <div className="flex items-center justify-center gap-3 text-slate-900">
+                                <Icons.Coach />
+                                <h3 className="text-[10px] font-black uppercase tracking-[0.3em]">Notas del Coach</h3>
+                            </div>
+                            <p className="text-xs text-slate-400 italic leading-relaxed px-4 border-l-4 border-rose-800/20 py-2">
+                                "{dayData.coachNote}"
+                            </p>
+                        </footer>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        };
 
         // --- DATA ---
 
@@ -222,13 +263,15 @@
                 lun: {
                     title: "Lunes • Empuje",
                     subtitle: "Potencia Mecánica",
+                    totalEstimatedTime: "95",
+                    strengthBlockTime: 24,
+                    recoveryTime: 46,
                     exercises: [
-                        { name: "Banca Inclinada", warmup: "2x6 @ 135 lb", work: "4x3 @ 185 lb", rir: "1-2 RIR" },
-                        { name: "Shoulder Press", warmup: "2x6 @ 150 lb", work: "4x4 @ 205 lb", rir: "1-2 RIR" }
+                        { name: "Banca Inclinada", warmup: "2x6 @ 135 lb", work: "4x3 @ 185 lb", rir: "1-2 RIR", estTime: 12 },
+                        { name: "Shoulder Press", warmup: "2x6 @ 150 lb", work: "4x4 @ 205 lb", rir: "1-2 RIR", estTime: 12 }
                     ],
-                    strengthTip: "Si la barra sube lenta, prioriza el descanso para proteger el sistema nervioso.",
                     cardio: {
-                        type: "SkiErg (5KM)", fcAvg: "165", fcMax: "182", drag: "5", spm: "34-42",
+                        type: "SkiErg (5KM)", estTime: 25, fcAvg: "165", fcMax: "182", drag: "5", spm: "34-42",
                         details: [{label: "Intervalos (6x500m)", val: "Avg 2:32"}, {label: "Resistencia (2x1km)", val: "Cierre 5:16"}],
                         finisher: "Superar 2000 cal/hr (1 min)"
                     },
@@ -239,13 +282,15 @@
                 mar: {
                     title: "Martes • Tracción",
                     subtitle: "Cadena Posterior",
+                    totalEstimatedTime: "105",
+                    strengthBlockTime: 30,
+                    recoveryTime: 46,
                     exercises: [
-                        { name: "Hex Bar Deadlift", warmup: "2x5 @ 225 lb", work: "3x5 @ 315 lb", rir: "1-2 RIR" },
-                        { name: "Remo en Polea", warmup: "2x8 @ 140 lb", work: "4x8 @ 190 lb", rir: "1-2 RIR" }
+                        { name: "Hex Bar Deadlift", warmup: "2x5 @ 225 lb", work: "3x5 @ 315 lb", rir: "1-2 RIR", estTime: 15 },
+                        { name: "Remo en Polea", warmup: "2x8 @ 140 lb", work: "4x8 @ 190 lb", rir: "1-2 RIR", estTime: 15 }
                     ],
-                    strengthTip: "Cierra escápulas antes de tirar para activar el dorsal y proteger bíceps.",
                     cardio: {
-                        type: "RowErg (5KM)", fcAvg: "160", fcMax: "178", drag: "5", spm: "24-28",
+                        type: "RowErg (5KM)", estTime: 29, fcAvg: "160", fcMax: "178", drag: "5", spm: "24-28",
                         details: [{label: "Intervalos (6x500m)", val: "Avg 2:10"}, {label: "Resistencia (2x1km)", val: "Cierre 4:35"}],
                         finisher: "Pulls Explosivos (1 min)"
                     },
@@ -256,9 +301,12 @@
                 mie: {
                     title: "Miércoles • Recu Activa",
                     subtitle: "Reset Hormonal",
+                    totalEstimatedTime: "85",
+                    strengthBlockTime: 0,
+                    recoveryTime: 40,
                     exercises: [],
                     cardio: {
-                        type: "Caminata", fcAvg: "110", fcMax: "130", drag: "0", spm: "N/A",
+                        type: "Caminata Activa", estTime: 45, fcAvg: "110", fcMax: "130", drag: "0", spm: "N/A",
                         details: [{label: "LISS", val: "45 min"}, {label: "Entorno", val: "Aire Libre"}],
                         finisher: "Cold Plunge Directo (5 min)"
                     },
@@ -269,14 +317,16 @@
                 jue: {
                     title: "Jueves • Pierna",
                     subtitle: "Base de Poder",
+                    totalEstimatedTime: "110",
+                    strengthBlockTime: 42,
+                    recoveryTime: 43,
                     exercises: [
-                        { name: "Hip Thrust", warmup: "Pirámide: 80kg (10r) > 120kg (6r)", work: "4x8 @ 350 lb (160 kg)", rir: "1-2 RIR" },
-                        { name: "Prensa (Unilateral)", warmup: "1x6 @ 265 lb (120 kg)", work: "3x4 @ 440 lb (200 kg) / P", rir: "1-2 RIR" },
-                        { name: "Pantorrilla Sentado", warmup: "2x6 @ 175 lb (80 kg)", work: "3x6 @ 265 lb (120 kg)", rir: "1-2 RIR" }
+                        { name: "Hip Thrust", warmup: "Pirámide: 80kg (10r) > 120kg (6r)", work: "4x8 @ 350 lb (160 kg)", rir: "1-2 RIR", estTime: 15 },
+                        { name: "Prensa (Unilateral)", warmup: "1x6 @ 265 lb (120 kg)", work: "3x4 @ 440 lb (200 kg) / P", rir: "1-2 RIR", estTime: 17 },
+                        { name: "Pantorrilla Sentado", warmup: "2x6 @ 175 lb (80 kg)", work: "3x6 @ 265 lb (120 kg)", rir: "1-2 RIR", estTime: 10 }
                     ],
-                    strengthTip: "Pantorrilla: Baja en 3s, pausa 1s abajo, sube explosivo.",
                     cardio: {
-                        type: "Assault Bike (Intervalos)", fcAvg: "155", fcMax: "185", drag: "Viento", spm: "70-80 RPM",
+                        type: "Assault Bike (Intervalos)", estTime: 25, fcAvg: "155", fcMax: "185", drag: "Viento", spm: "70-80 RPM",
                         details: [{label: "Sprints", val: "10 x 30s/30s"}, {label: "Potencia Pico", val: "650+ Watts"}],
                         finisher: "Sprint Final 30s All-Out"
                     },
@@ -287,9 +337,12 @@
                 vie: {
                     title: "Viernes • Híbrido",
                     subtitle: "Triple Machine Threat",
+                    totalEstimatedTime: "95",
+                    strengthBlockTime: 0,
+                    recoveryTime: 46,
                     exercises: [],
                     cardio: {
-                        type: "Triple Circuito Máquina", fcAvg: "168", fcMax: "188", drag: "Dinámico", spm: "Alto",
+                        type: "Triple Circuito Máquina", estTime: 49, fcAvg: "168", fcMax: "188", drag: "Dinámico", spm: "Alto",
                         details: [
                             {label: "3 Rondas de:", val: "Continuo"},
                             {label: "RowErg", val: "500m Pace 2:10"},
@@ -305,10 +358,13 @@
                 sab: {
                     title: "Sábado • Endurance",
                     subtitle: "Zona 2 Oxidativa",
+                    totalEstimatedTime: "110",
+                    strengthBlockTime: 0,
+                    recoveryTime: 35,
                     exercises: [],
                     cardio: {
-                        type: "Cardio Estado Estable", fcAvg: "125", fcMax: "140", drag: "3", spm: "N/A",
-                        details: [{label: "Inclinada", val: "60 min"}, {label: "Inclinación", val: "8.0 - 10.0"}],
+                        type: "Caminata Inclinada", estTime: 75, fcAvg: "125", fcMax: "140", drag: "3", spm: "N/A",
+                        details: [{label: "Ritmo Estado Estable", val: "60 min"}, {label: "Inclinación", val: "8.0 - 10.0"}],
                         finisher: "Ducha Fría Prolongada"
                     },
                     recovery: [{name: "Sauna", val: "15 min"}, {name: "Cold Plunge", val: "5 min"}, {name: "Jacuzzi", val: "15 min"}],
@@ -318,6 +374,9 @@
                 dom: {
                     title: "Domingo • Zen",
                     subtitle: "Reset Semanal",
+                    totalEstimatedTime: "60",
+                    strengthBlockTime: 0,
+                    recoveryTime: 55,
                     exercises: [],
                     cardio: null,
                     recovery: [{name: "Sauna", val: "20 min"}, {name: "Cold Plunge", val: "5 min"}, {name: "Jacuzzi", val: "30 min"}],
