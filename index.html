@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iron Performance Hub</title>
-    <!-- Cargamos React y Tailwind desde la web (CDN) para que no necesites instalar nada -->
+    <!-- Cargamos React y Tailwind desde CDN -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
+        /* Animación simple para transiciones */
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="bg-slate-100">
@@ -21,41 +24,49 @@
     <script type="text/babel">
         const { useState } = React;
 
-        // Iconos simplificados con SVG para no depender de librerías pesadas
+        // --- ICONOS SVG ---
         const Icons = {
-            ChevronLeft: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>,
-            Zap: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 14.75V3.5a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 .5.5v11.25M4 14.75a2.25 2.25 0 0 0 2.25 2.25h11.5A2.25 2.25 0 0 0 20 14.75M4 14.75l-1 5.25h18l-1-5.25"/></svg>,
-            Dumbbell: () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M18 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M9 12h6"/><path d="M3 10v4"/><path d="M21 10v4"/></svg>
+            ChevronLeft: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>,
+            Zap: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>,
+            Dumbbell: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M18 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M9 12h6"/><path d="M3 10v4"/><path d="M21 10v4"/></svg>,
+            Brain: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"/></svg>,
+            Zen: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>,
+            Coach: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         };
+
+        // --- COMPONENTES ---
 
         const Dashboard = ({ onSelectDay }) => {
             const days = [
                 { id: 'lun', name: 'Lunes', type: 'Empuje', color: 'bg-rose-800' },
                 { id: 'mar', name: 'Martes', type: 'Tracción', color: 'bg-slate-800' },
-                { id: 'mie', name: 'Miércoles', type: 'Descanso', color: 'bg-slate-400' },
                 { id: 'jue', name: 'Jueves', type: 'Pierna', color: 'bg-slate-800' },
                 { id: 'vie', name: 'Viernes', type: 'Híbrido', color: 'bg-rose-800' }
             ];
 
             return (
-                <div className="min-h-screen bg-white pb-20">
-                    <div className="bg-slate-900 p-8 rounded-b-[3rem] text-white mb-8 shadow-2xl">
-                        <h1 className="text-4xl font-black uppercase italic tracking-tighter mb-2">Iron Hub</h1>
-                        <p className="text-rose-500 text-[10px] font-bold uppercase tracking-[0.3em]">Elite Performance</p>
+                <div className="min-h-screen bg-white pb-20 fade-in">
+                    <div className="bg-slate-900 p-10 rounded-b-[3.5rem] text-white mb-10 shadow-2xl relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-40 h-40 bg-rose-600/10 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+                        <h1 className="text-5xl font-black uppercase italic tracking-tighter mb-2 relative z-10">Iron Hub</h1>
+                        <p className="text-rose-500 text-[10px] font-bold uppercase tracking-[0.4em] relative z-10">Elite Performance Dashboard</p>
                     </div>
-                    <div className="px-6 space-y-4">
+                    <div className="px-6 space-y-5">
+                        <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-2">Selecciona Sesión</h2>
                         {days.map(day => (
-                            <button key={day.id} onClick={() => onSelectDay(day.id)} className="w-full flex items-center justify-between p-5 bg-slate-50 rounded-[2rem] active:scale-95 transition-transform border border-transparent active:border-rose-200 shadow-sm">
-                                <div className="flex items-center gap-4">
-                                    <div className={`${day.color} w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg`}>
+                            <button key={day.id} onClick={() => onSelectDay(day.id)} className="w-full flex items-center justify-between p-6 bg-slate-50 rounded-[2.5rem] active:scale-95 transition-all border border-transparent active:border-rose-200 shadow-sm">
+                                <div className="flex items-center gap-5">
+                                    <div className={`${day.color} w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg`}>
                                         <Icons.Zap />
                                     </div>
                                     <div className="text-left">
-                                        <h3 className="font-black text-slate-800 uppercase text-lg italic">{day.name}</h3>
-                                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{day.type}</p>
+                                        <h3 className="font-black text-slate-800 uppercase text-xl italic leading-none">{day.name}</h3>
+                                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">{day.type}</p>
                                     </div>
                                 </div>
-                                <div className="text-slate-300">➜</div>
+                                <div className="text-slate-300">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                                </div>
                             </button>
                         ))}
                     </div>
@@ -64,70 +75,223 @@
         };
 
         const DailyReport = ({ dayData, onBack }) => (
-            <div className="min-h-screen bg-slate-50 pb-10">
-                <div className="sticky top-0 bg-white/80 backdrop-blur-md px-4 py-3 flex items-center border-b border-slate-100 z-50">
-                    <button onClick={onBack} className="p-2 text-slate-400"><Icons.ChevronLeft /></button>
-                    <h2 className="flex-1 text-center text-[10px] font-black uppercase tracking-widest text-slate-400">{dayData.title}</h2>
+            <div className="min-h-screen bg-slate-50 pb-20 fade-in">
+                {/* Header Fijo */}
+                <div className="sticky top-0 bg-white/90 backdrop-blur-lg px-4 py-4 flex items-center border-b border-slate-100 z-50">
+                    <button onClick={onBack} className="p-2 text-slate-400 active:text-rose-800"><Icons.ChevronLeft /></button>
+                    <h2 className="flex-1 text-center text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{dayData.title}</h2>
                     <div className="w-10"></div>
                 </div>
-                <div className="p-4 space-y-6 max-w-md mx-auto">
-                    <div className="bg-slate-900 rounded-[2rem] p-6 text-white shadow-xl">
-                        <p className="text-[9px] font-bold text-rose-500 uppercase tracking-widest mb-1">{dayData.subtitle}</p>
-                        <h1 className="text-2xl font-black italic uppercase tracking-tighter mb-4">Iron Performance</h1>
+
+                <div className="p-5 space-y-8 max-w-md mx-auto">
+                    {/* Banner de Estado */}
+                    <div className="bg-slate-900 rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-rose-600/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                        <p className="text-[10px] font-bold text-rose-500 uppercase tracking-[0.3em] mb-2">{dayData.subtitle}</p>
+                        <h1 className="text-3xl font-black italic uppercase tracking-tighter mb-6">Iron Performance</h1>
                         <div className="flex gap-4">
-                            <div className="bg-white/10 px-3 py-1 rounded-xl border border-white/10 text-xs"><b>112 KG</b></div>
-                            <div className="bg-white/10 px-3 py-1 rounded-xl border border-white/10 text-xs"><b>~2,000 KCAL</b></div>
+                            <div className="bg-white/5 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10">
+                                <p className="text-[8px] uppercase font-bold text-slate-500 mb-1">Peso</p>
+                                <p className="text-sm font-black italic">112 KG</p>
+                            </div>
+                            <div className="bg-white/5 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10">
+                                <p className="text-[8px] uppercase font-bold text-slate-500 mb-1">Déficit</p>
+                                <p className="text-sm font-black italic">~2,000 KCAL</p>
+                            </div>
                         </div>
                     </div>
 
+                    {/* Bloque 1: Fuerza */}
                     <section className="space-y-4">
-                        <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 px-2">Bloque 1: Fuerza</h3>
+                        <div className="flex items-center gap-3 px-2 text-rose-800">
+                            <Icons.Dumbbell />
+                            <h3 className="text-xs font-black uppercase tracking-widest text-slate-800">Bloque 1: Fuerza (SNC ON)</h3>
+                        </div>
                         {dayData.exercises.map((ex, i) => (
-                            <div key={i} className="bg-white p-5 rounded-[2rem] border border-slate-100 shadow-sm">
-                                <div className="flex justify-between items-start mb-2">
-                                    <h4 className="font-black text-slate-800 uppercase text-sm">{ex.name}</h4>
-                                    <span className="text-[9px] font-black px-2 py-0.5 rounded border bg-rose-50 text-rose-800 border-rose-100 uppercase tracking-wider">{ex.rir}</span>
+                            <div key={i} className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm space-y-3">
+                                <div className="flex justify-between items-start">
+                                    <div>
+                                        <h4 className="font-black text-slate-800 uppercase text-sm leading-tight">{ex.name}</h4>
+                                        <p className="text-[10px] text-slate-400 font-bold uppercase mt-1">{ex.warmup}</p>
+                                    </div>
+                                    <span className="text-[9px] font-black px-2 py-1 rounded-lg border bg-rose-50 text-rose-800 border-rose-100 uppercase tracking-wider">{ex.rir}</span>
                                 </div>
-                                <div className="flex items-center gap-2 text-rose-800 font-black text-sm">
-                                    <Icons.Dumbbell /> {ex.work}
+                                <div className="text-rose-800 font-black text-base italic border-t border-slate-50 pt-3">
+                                    {ex.work}
                                 </div>
                             </div>
                         ))}
+                        <div className="bg-slate-100 p-4 rounded-2xl border border-slate-200 mt-2">
+                             <p className="text-[11px] text-slate-500 leading-relaxed italic">
+                                <span className="font-black text-slate-800 not-italic uppercase tracking-tighter mr-1">💡 Coach Tip:</span> {dayData.strengthTip}
+                             </p>
+                        </div>
                     </section>
 
+                    {/* Bloque 2: SkiErg */}
                     <section className="space-y-4">
-                        <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 px-2">Bloque 2: SkiErg</h3>
-                        <div className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm space-y-4">
-                            <div className="grid grid-cols-2 gap-4 text-center">
-                                <div><p className="text-[8px] font-black text-slate-400 uppercase">FC Max</p><p className="font-black text-rose-800">{dayData.skiErg.fcMax} BPM</p></div>
-                                <div><p className="text-[8px] font-black text-slate-400 uppercase">Avg 500m</p><p className="font-black">{dayData.skiErg.avg500}</p></div>
+                        <div className="flex items-center gap-3 px-2 text-rose-800">
+                            <Icons.Zap />
+                            <h3 className="text-xs font-black uppercase tracking-widest text-slate-800">Bloque 2: SkiErg (5.0 KM)</h3>
+                        </div>
+                        <div className="bg-white p-6 rounded-[3rem] border border-slate-100 shadow-sm space-y-6">
+                            <div className="grid grid-cols-2 gap-4 border-b border-slate-50 pb-5">
+                                <div className="text-center">
+                                    <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1">FC Prom / Max</p>
+                                    <p className="font-black text-slate-800">{dayData.skiErg.fcAvg} <span className="text-rose-800">/ {dayData.skiErg.fcMax}</span></p>
+                                </div>
+                                <div className="text-center border-l border-slate-100">
+                                    <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1">Drag Factor</p>
+                                    <p className="font-black text-slate-800">{dayData.skiErg.drag} <span className="text-[9px] font-normal opacity-50">@{dayData.skiErg.spm}</span></p>
+                                </div>
                             </div>
-                            <div className="bg-rose-800 rounded-2xl p-4 text-white text-center">
-                                <p className="text-[9px] font-black uppercase opacity-70">Finalizador 1m</p>
-                                <p className="font-black italic uppercase tracking-tighter">🚀 {dayData.skiErg.finisher}</p>
+                            
+                            <div className="space-y-3">
+                                <div className="flex justify-between items-center text-[11px] bg-slate-50 p-3 rounded-xl">
+                                    <span className="font-bold text-slate-500">Intervalos (6x500m)</span>
+                                    <span className="font-black text-slate-800 uppercase tracking-tighter">Avg {dayData.skiErg.avg500}</span>
+                                </div>
+                                <div className="flex justify-between items-center text-[11px] bg-slate-50 p-3 rounded-xl">
+                                    <span className="font-bold text-slate-500">Resistencia (2x1km)</span>
+                                    <span className="font-black text-slate-800 uppercase tracking-tighter">Cierre {dayData.skiErg.lastKm}</span>
+                                </div>
+                            </div>
+
+                            <div className="bg-rose-800 rounded-[2rem] p-5 text-white shadow-xl shadow-rose-100">
+                                <div className="flex justify-between items-center mb-1">
+                                    <p className="text-[9px] font-black uppercase tracking-widest opacity-70">Finalizador 1m All-Out</p>
+                                    <p className="text-[10px] font-bold">Objetivo: >2000</p>
+                                </div>
+                                <p className="text-lg font-black italic uppercase tracking-tighter">🚀 {dayData.skiErg.finisher}</p>
                             </div>
                         </div>
                     </section>
+
+                    {/* Bloque 3: Recuperación & Tips */}
+                    <div className="grid grid-cols-1 gap-6">
+                        <section className="space-y-4">
+                            <div className="flex items-center gap-3 px-2 text-blue-600">
+                                <Icons.Zen />
+                                <h3 className="text-xs font-black uppercase tracking-widest text-slate-800">Bloque 3: Recuperación Zen</h3>
+                            </div>
+                            <div className="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                                <div className="space-y-4">
+                                    {dayData.recovery.map((item, i) => (
+                                        <div key={i} className="flex justify-between items-center border-b border-slate-50 pb-3 last:border-0 last:pb-0">
+                                            <span className="text-xs font-bold text-slate-500">{item.name}</span>
+                                            <span className="text-xs font-black text-rose-800 bg-rose-50 px-3 py-1 rounded-xl">{item.val}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        <section className="space-y-4">
+                            <div className="flex items-center gap-3 px-2 text-rose-800">
+                                <Icons.Brain />
+                                <h3 className="text-xs font-black uppercase tracking-widest text-slate-800">Enfoque Pro</h3>
+                            </div>
+                            <div className="bg-slate-900 rounded-[2.5rem] p-8 text-white shadow-xl">
+                                <ul className="space-y-4">
+                                    {dayData.proTips.map((tip, i) => (
+                                        <li key={i} className="flex gap-4 items-start">
+                                            <span className="text-rose-500 font-black mt-1">●</span>
+                                            <p className="text-[11px] font-bold text-slate-300 leading-relaxed uppercase tracking-tight">{tip}</p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+
+                    {/* Notas del Coach */}
+                    <footer className="border-t-2 border-slate-100 pt-8 px-2 space-y-4">
+                        <div className="flex items-center gap-3 text-slate-900">
+                            <Icons.Coach />
+                            <h3 className="text-[10px] font-black uppercase tracking-[0.3em]">Notas del Coach</h3>
+                        </div>
+                        <p className="text-xs text-slate-400 italic leading-relaxed pl-6 border-l-4 border-rose-800/20 py-2">
+                            "{dayData.coachNote}"
+                        </p>
+                    </footer>
                 </div>
             </div>
         );
 
+        // --- APP LOGIC ---
+
         function App() {
             const [page, setPage] = useState('home');
+
             const data = {
                 lun: {
                     title: "Lunes • Empuje",
                     subtitle: "SNC & Metabólico",
                     exercises: [
-                        { name: "Banca Inclinada", work: "4x3 @ 185 lb", rir: "1-2 RIR" },
-                        { name: "Shoulder Press", work: "4x4 @ 205 lb", rir: "1-2 RIR" }
+                        { name: "Banca Inclinada", warmup: "2x6 @ 135 lbs", work: "4x3 @ 185 lb", rir: "1-2 RIR" },
+                        { name: "Shoulder Press", warmup: "2x6 @ 150 lb", work: "4x4 @ 205 lb", rir: "1-2 RIR" }
                     ],
-                    skiErg: { fcMax: "182", avg500: "2:32", finisher: ">2000 cal/hr" }
+                    strengthTip: "Si la barra sube lenta, prioriza el descanso para proteger el sistema nervioso.",
+                    skiErg: { 
+                        fcAvg: "165",
+                        fcMax: "182", 
+                        drag: "5",
+                        spm: "34-42",
+                        avg500: "2:32", 
+                        lastKm: "5:16",
+                        finisher: "Superar 2000 cal/hr" 
+                    },
+                    recovery: [
+                        { name: "Sauna (90°C)", val: "20 min" },
+                        { name: "Cold Plunge (8°C)", val: "2x3 min" },
+                        { name: "Jacuzzi (Temp)", val: "20 min" }
+                    ],
+                    proTips: [
+                        "Usa tus 112kg: Cae sobre las cuerdas con el peso del core.",
+                        "Caminata activa constante en los descansos 1:1."
+                    ],
+                    coachNote: "Dar todo en el finalizador all-out del SkiErg para testear capacidad mental. La disciplina se forja en el último segundo del cronómetro."
+                },
+                mar: {
+                    title: "Martes • Tracción",
+                    subtitle: "Cadena Posterior",
+                    exercises: [
+                        { name: "Hex Bar Deadlift", warmup: "2x5 @ 225 lb", work: "3x5 @ 315 lb", rir: "1-2 RIR" },
+                        { name: "Remo en Polea", warmup: "2x8 suave", work: "4x8 @ 180 lb", rir: "1-2 RIR" }
+                    ],
+                    strengthTip: "Cierra las escápulas antes de cada tirón para activar el dorsal.",
+                    skiErg: { 
+                        fcAvg: "158",
+                        fcMax: "175", 
+                        drag: "6",
+                        spm: "30-35",
+                        avg500: "2:40", 
+                        lastKm: "5:30",
+                        finisher: "Pulls Explosivos" 
+                    },
+                    recovery: [
+                        { name: "Estiramiento", val: "15 min" },
+                        { name: "Foam Roller", val: "10 min" }
+                    ],
+                    proTips: [
+                        "Mantén el pecho arriba en el peso muerto.",
+                        "No uses straps a menos que el agarre falle."
+                    ],
+                    coachNote: "La espalda es el soporte de tu fuerza. No sacrifiques técnica por carga hoy."
                 }
             };
 
-            if (page === 'home') return <Dashboard onSelectDay={setPage} />;
-            return <DailyReport dayData={data[page] || data.lun} onBack={() => setPage('home')} />;
+            const handleSelect = (id) => {
+                if (data[id]) {
+                    setPage(id);
+                    window.scrollTo(0, 0);
+                } else {
+                    alert("Rutina aún no configurada para este día.");
+                }
+            };
+
+            if (page === 'home') return <Dashboard onSelectDay={handleSelect} />;
+            return <DailyReport dayData={data[page]} onBack={() => setPage('home')} />;
         }
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
