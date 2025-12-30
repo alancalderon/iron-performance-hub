@@ -128,11 +128,11 @@
                         </div>
                     </section>
 
-                    {/* Bloque 2: SkiErg */}
+                    {/* Bloque 2: Cardio */}
                     <section className="space-y-4">
                         <div className="flex items-center gap-3 px-2 text-rose-800">
                             <Icons.Zap />
-                            <h3 className="text-xs font-black uppercase tracking-widest text-slate-800">Bloque 2: SkiErg (5.0 KM)</h3>
+                            <h3 className="text-xs font-black uppercase tracking-widest text-slate-800">Bloque 2: {dayData.cardioType} (5.0 KM)</h3>
                         </div>
                         <div className="bg-white p-6 rounded-[3rem] border border-slate-100 shadow-sm space-y-6">
                             <div className="grid grid-cols-2 gap-4 border-b border-slate-50 pb-5">
@@ -160,7 +160,7 @@
                             <div className="bg-rose-800 rounded-[2rem] p-5 text-white shadow-xl shadow-rose-100">
                                 <div className="flex justify-between items-center mb-1">
                                     <p className="text-[9px] font-black uppercase tracking-widest opacity-70">Finalizador 1m All-Out</p>
-                                    <p className="text-[10px] font-bold">Objetivo: >2000</p>
+                                    <p className="text-[10px] font-bold">Objetivo: >{dayData.skiErg.finisherTarget}</p>
                                 </div>
                                 <p className="text-lg font-black italic uppercase tracking-tighter">🚀 {dayData.skiErg.finisher}</p>
                             </div>
@@ -227,6 +227,7 @@
                 lun: {
                     title: "Lunes • Empuje",
                     subtitle: "SNC & Metabólico",
+                    cardioType: "SkiErg",
                     exercises: [
                         { name: "Banca Inclinada", warmup: "2x6 @ 135 lbs", work: "4x3 @ 185 lb", rir: "1-2 RIR" },
                         { name: "Shoulder Press", warmup: "2x6 @ 150 lb", work: "4x4 @ 205 lb", rir: "1-2 RIR" }
@@ -239,7 +240,8 @@
                         spm: "34-42",
                         avg500: "2:32", 
                         lastKm: "5:16",
-                        finisher: "Superar 2000 cal/hr" 
+                        finisher: "Superar 2000 cal/hr",
+                        finisherTarget: "2000"
                     },
                     recovery: [
                         { name: "Sauna (90°C)", val: "20 min" },
@@ -254,30 +256,33 @@
                 },
                 mar: {
                     title: "Martes • Tracción",
-                    subtitle: "Cadena Posterior",
+                    subtitle: "Cadena Posterior & Potencia",
+                    cardioType: "RowErg",
                     exercises: [
                         { name: "Hex Bar Deadlift", warmup: "2x5 @ 225 lb", work: "3x5 @ 315 lb", rir: "1-2 RIR" },
-                        { name: "Remo en Polea", warmup: "2x8 suave", work: "4x8 @ 180 lb", rir: "1-2 RIR" }
+                        { name: "Remo en Polea (Ancho)", warmup: "2x8 @ 140 lb", work: "4x8 @ 190 lb", rir: "1-2 RIR" }
                     ],
-                    strengthTip: "Cierra las escápulas antes de cada tirón para activar el dorsal.",
+                    strengthTip: "Cierra las escápulas antes de cada tirón para activar el dorsal y proteger bíceps.",
                     skiErg: { 
-                        fcAvg: "158",
-                        fcMax: "175", 
-                        drag: "6",
-                        spm: "30-35",
-                        avg500: "2:40", 
-                        lastKm: "5:30",
-                        finisher: "Pulls Explosivos" 
+                        fcAvg: "160",
+                        fcMax: "178", 
+                        drag: "5",
+                        spm: "24-28",
+                        avg500: "2:10 (Est.)", 
+                        lastKm: "4:35 (Est.)",
+                        finisher: "Superar 2000 cal/hr",
+                        finisherTarget: "2000"
                     },
                     recovery: [
-                        { name: "Estiramiento", val: "15 min" },
-                        { name: "Foam Roller", val: "10 min" }
+                        { name: "Sauna (90°C)", val: "20 min" },
+                        { name: "Foam Roller (Espalda)", val: "10 min" },
+                        { name: "Jacuzzi (Temp)", val: "20 min" }
                     ],
                     proTips: [
-                        "Mantén el pecho arriba en el peso muerto.",
-                        "No uses straps a menos que el agarre falle."
+                        "Usa tus 112kg: El empuje de piernas es el 60% de la potencia del remo.",
+                        "No uses straps hoy: Entrena tu agarre para el peso muerto."
                     ],
-                    coachNote: "La espalda es el soporte de tu fuerza. No sacrifiques técnica por carga hoy."
+                    coachNote: "El remo es más explosivo que el SkiErg. Aprovecha tu masa para mover el ventilador con violencia controlada."
                 }
             };
 
